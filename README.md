@@ -4,7 +4,7 @@ This is a sample iOS application demonstrating WiFi and Bluetooth scanning funct
 
 ## Demo
 
-<video src="media/Demo.MP4" width="300" controls="true"></video>
+[Demo](https://github.com/Dicky019/Test-IOS-Dev/blob/main/media/Demo.MP4)
 
 ## Features
 
