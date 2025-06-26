@@ -43,7 +43,7 @@ final class WiFiDataSource: WiFiDataSourceProtocol {
   }
   
   func scanForNetworks() async throws -> [WiFiInfo] {
-    // Since iOS doesn't allow direct WiFi scanning, simulate it
+//    TODO: iOS doesn't allow direct WiFi scanning without NEHotspotHelper entitlement
     return await simulateNetworkDiscovery()
   }
   
@@ -51,37 +51,42 @@ final class WiFiDataSource: WiFiDataSourceProtocol {
     scanTimer?.invalidate()
     scanTimer = nil
   }
-  
+}
+
+// MARK: - Updated WiFiDataSource.swift (relevant section)
+extension WiFiDataSource {
   private func simulateNetworkDiscovery() async -> [WiFiInfo] {
     let sampleNetworks = [
-      ("HomeWiFi_5G", -45, true, "5 GHz"),
-      ("OfficeNetwork", -55, true, "2.4 GHz"),
-      ("Guest_Network", -65, false, "2.4 GHz"),
-      ("Cafe_WiFi", -70, false, "2.4 GHz"),
-      ("Neighbor_5G", -75, true, "5 GHz"),
-      ("Public_Hotspot", -80, false, "2.4 GHz"),
-      ("Airport_WiFi", -85, false, "2.4 GHz")
+      ("fh_9a5d68_5G", -45, true, "5 GHz", BSSIDGenerator.VendorPrefix.tpLink),
+      ("Dicky's iPhone", -55, true, "2.4 GHz", BSSIDGenerator.VendorPrefix.apple),
+      ("sasna", -65, false, "2.4 GHz", BSSIDGenerator.VendorPrefix.tpLink),
     ]
     
     var networks: [WiFiInfo] = []
     
-    // Add current network first
+    // Add current network first if available
     if let currentNetwork = getCurrentNetworkInfo() {
       networks.append(currentNetwork)
     }
     
-    // Add simulated networks with delay
-    for (ssid, rssi, isSecure, freq) in sampleNetworks {
+    // Simulate discovering networks with delays
+    for (ssid, rssi, isSecure, freq, vendorPrefix) in sampleNetworks {
+      // Skip if this is the current network
+      if networks.first?.ssid == ssid {
+        continue
+      }
+      
       let network = WiFiInfo(
         ssid: ssid,
-        bssid: "00:00:00:00:00:\(String(format: "%02X", Int.random(in: 0...255)))",
+        bssid: BSSIDGenerator.generate(withVendorPrefix: vendorPrefix),
         signalStrength: rssi,
         isSecure: isSecure,
-        frequency: freq
+        frequency: freq,
+        isConnected: false
       )
       networks.append(network)
       
-      // Simulate delay between discoveries
+      // Simulate discovery delay
       try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
     }
     

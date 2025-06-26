@@ -12,7 +12,7 @@ struct WiFiNetworksCard: View {
   
   var body: some View {
     VStack(alignment: .leading, spacing: 12) {
-      WiFiNetworksHeader(count: viewModel.networks.count)
+      InfoHeader(count: viewModel.networks.count)
       WiFiNetworksList(networks: viewModel.networks)
     }
     .padding()

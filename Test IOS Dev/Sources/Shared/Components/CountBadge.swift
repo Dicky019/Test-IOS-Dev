@@ -1,5 +1,5 @@
 //
-//  NetworkCountBadge.swift
+//  CountBadge.swift
 //  Test IOS Dev
 //
 //  Created by Dicky Darmawan on 26/06/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NetworkCountBadge: View {
+struct CountBadge: View {
   let count: Int
   
   var body: some View {

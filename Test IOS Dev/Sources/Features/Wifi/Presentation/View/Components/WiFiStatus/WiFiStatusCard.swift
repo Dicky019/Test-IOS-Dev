@@ -26,7 +26,7 @@ struct WiFiStatusCard: View {
             
             // Scanning Progress
             if viewModel.isScanning {
-                WiFiScanningProgress()
+              ScanningProgress(scaningType: "WiFi")
             }
             
             // Error Message

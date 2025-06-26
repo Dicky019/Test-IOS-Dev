@@ -15,6 +15,7 @@ final class DIContainer {
   private lazy var wifiDataSource: WiFiDataSourceProtocol = WiFiDataSource()
   private lazy var networkStatusDataSource: NetworkStatusDataSourceProtocol = NetworkStatusDataSource()
   private lazy var locationPermissionDataSource: LocationPermissionDataSourceProtocol = LocationPermissionDataSource()
+  private lazy var bluetoothDataSource: BluetoothDataSourceProtocol = BluetoothDataSource()
   
   // Repositories
   private lazy var wifiRepository: WiFiRepositoryProtocol = WiFiRepository(
@@ -24,6 +25,10 @@ final class DIContainer {
   
   private lazy var networkRepository: NetworkStatusRepositoryProtocol = NetworkRepository(
     dataSource: networkStatusDataSource
+  )
+  
+  private lazy var bluetoothRepository: BluetoothRepositoryProtocol = BluetoothRepository(
+    bluetoothDataSource: bluetoothDataSource
   )
   
   // Use Cases
@@ -41,5 +46,23 @@ final class DIContainer {
   
   lazy var checkLocationPermissionUseCase: CheckLocationPermissionUseCase = CheckLocationPermissionUseCase(
     repository: wifiRepository
+  )
+  
+  // MARK: - Bluetooth
+  
+  lazy var startScanningUseCase: StartScanningUseCase = StartScanningUseCase(
+    bluetoothRepository: bluetoothRepository
+  )
+  
+  lazy var stopScanningUseCase: StopScanningUseCase = StopScanningUseCase(
+    bluetoothRepository: bluetoothRepository
+  )
+  
+  lazy var getBluetoothDevicesUseCase: GetBluetoothDevicesUseCase = GetBluetoothDevicesUseCase(
+    bluetoothRepository: bluetoothRepository
+  )
+  
+  lazy var monitorBluetoothStateUseCase: MonitorBluetoothStateUseCase = MonitorBluetoothStateUseCase(
+    bluetoothRepository: bluetoothRepository
   )
 }

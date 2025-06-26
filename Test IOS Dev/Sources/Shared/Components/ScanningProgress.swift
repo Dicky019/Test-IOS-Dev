@@ -1,5 +1,5 @@
 //
-//  WiFiScanningProgress.swift
+//  ScanningProgress.swift
 //  Test IOS Dev
 //
 //  Created by Dicky Darmawan on 26/06/25.
@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-struct WiFiScanningProgress: View {
+struct ScanningProgress: View {
+  var scaningType: String
+  
   var body: some View {
     HStack {
       ProgressView()
         .scaleEffect(0.8)
-      Text("Scanning for networks...")
+      Text("Scanning \(scaningType)...")
         .font(.subheadline)
         .foregroundColor(.blue)
     }

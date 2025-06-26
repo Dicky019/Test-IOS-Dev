@@ -1,5 +1,5 @@
 //
-//  WiFiNetworksHeader.swift
+//  InfoHeader.swift
 //  Test IOS Dev
 //
 //  Created by Dicky Darmawan on 26/06/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WiFiNetworksHeader: View {
+struct InfoHeader: View {
   let count: Int
   
   var body: some View {
@@ -18,7 +18,7 @@ struct WiFiNetworksHeader: View {
       
       Spacer()
       
-      NetworkCountBadge(count: count)
+      CountBadge(count: count)
     }
   }
 }
