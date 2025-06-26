@@ -2,6 +2,10 @@
 
 This is a sample iOS application demonstrating WiFi and Bluetooth scanning functionalities.
 
+## Demo
+
+<video src="media/Demo.MP4" width="300" controls="true"></video>
+
 ## Features
 
 - **WiFi Scanning:**
@@ -38,14 +42,17 @@ This project uses [Tuist](https://tuist.io) for project generation and dependenc
 1.  Clone the repository.
 2.  Open a terminal in the project's root directory.
 3.  Install dependencies:
+    
     ```bash
     tuist install
     ```
 4.  Generate the Xcode project:
+    
     ```bash
     tuist generate
     ```
 5.  Open the generated `.xcworkspace` file in Xcode:
+    
     ```bash
     open "Test IOS Dev.xcworkspace"
     ```
